@@ -1,0 +1,32 @@
+From f27bd0cc0ce5dc6b85ca2ca612630bbd70d5ef02 Mon Sep 17 00:00:00 2001
+Message-Id: <f27bd0cc0ce5dc6b85ca2ca612630bbd70d5ef02.1492694142.git.devel@agrez.net>
+From: Vaughan Agrez <devel@agrez.net>
+Date: Thu, 20 Apr 2017 21:15:36 +0800
+Subject: [PATCH] Fix omxplayer libs path
+
+---
+ omxplayer | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+diff --git a/omxplayer b/omxplayer
+index 6d9cdb6..bef2600 100755
+--- a/omxplayer
++++ b/omxplayer
+@@ -5,13 +5,7 @@
+ 
+ OMXPLAYER_DIR=`dirname $0`
+ OMXPLAYER_BIN="$OMXPLAYER_DIR/omxplayer.bin"
+-OMXPLAYER_LIBS="/opt/vc/lib"
+-
+-if [ -e "$OMXPLAYER_DIR/ffmpeg_compiled" ]; then
+-    OMXPLAYER_LIBS="$OMXPLAYER_LIBS:$OMXPLAYER_DIR/ffmpeg_compiled/usr/local/lib"
+-else
+-    OMXPLAYER_LIBS="$OMXPLAYER_LIBS:/usr/lib/omxplayer"
+-fi
++OMXPLAYER_LIBS="/usr/lib/omxplayer"
+ 
+ refresh_regex='(|.* )(-r|--refresh)( .*|$)'
+ audio_regex='.*\.(mp3|wav|wma|cda|ogg|ogm|aac|ac3|flac)( .*|$)'
+-- 
+2.9.3
+

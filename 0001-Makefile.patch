@@ -1,0 +1,35 @@
+From d2c912b4d3b60c2ba12bd0a5d13252fa33b4383b Mon Sep 17 00:00:00 2001
+Message-Id: <d2c912b4d3b60c2ba12bd0a5d13252fa33b4383b.1492608132.git.devel@agrez.net>
+From: Vaughan Agrez <devel@agrez.net>
+Date: Wed, 19 Apr 2017 21:21:20 +0800
+Subject: [PATCH] Modify Makefile
+
+---
+ Makefile | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 2857e94..bbaefc5 100644
+--- a/Makefile
++++ b/Makefile
+@@ -4,7 +4,7 @@ CFLAGS+=-std=c++0x -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -DTARGET_POSIX
+ 
+ LDFLAGS+=-L./ -Lffmpeg_compiled/usr/local/lib/ -lc -lWFC -lGLESv2 -lEGL -lbcm_host -lopenmaxil -lfreetype -lz -lasound
+ 
+-INCLUDES+=-I./ -Ilinux -Iffmpeg_compiled/usr/local/include/ -I /usr/include/dbus-1.0 -I /usr/lib/arm-linux-gnueabihf/dbus-1.0/include
++INCLUDES+=-I./ -Ilinux -Iffmpeg_compiled/usr/local/include/
+ 
+ DIST ?= omxplayer-dist
+ 
+@@ -52,7 +52,7 @@ version:
+ 	bash gen_version.sh > version.h 
+ 
+ omxplayer.bin: version $(OBJS)
+-	$(CXX) $(LDFLAGS) -o omxplayer.bin $(OBJS) -lvchiq_arm -lvchostif -lvcos -ldbus-1 -lrt -lpthread -lavutil -lavcodec -lavformat -lswscale -lswresample -lpcre
++	$(CXX) -o omxplayer.bin $(OBJS) $(LDFLAGS) -lvchiq_arm -lvchostif -lvcos -lOpenVG -ldbus-1 -lrt -lpthread -lavutil -lavcodec -lavformat -lswscale -lswresample -lpcre
+ 	$(STRIP) omxplayer.bin
+ 
+ help.h: README.md Makefile
+-- 
+2.9.3
+
