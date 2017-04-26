@@ -6,7 +6,7 @@
 
 Name:       omxplayer
 Version:    %{commit_date}
-Release:    1.%{commit_short}%{dist}
+Release:    2.%{commit_short}%{dist}
 Summary:    Raspberry Pi command line OMX player
 Group:      Applications/Multimedia
 License:    GPL-2.0+
@@ -32,7 +32,9 @@ BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(smbclient)
 
 Requires:   %{name}-libs
+Requires:   fbset
 Requires:   gnu-free-sans-fonts
+
 
 
 %description
@@ -101,5 +103,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Apr 24 2017 Vaughan Agrez <devel at agrez dot net> 20170330-2.061425a5
+- Add requires for fbset
+
 * Thu Apr 20 2017 Vaughan Agrez <devel at agrez dot net> 20170330-1.061425a5
 - Initial package
