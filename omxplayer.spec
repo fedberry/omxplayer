@@ -108,7 +108,6 @@ rm -rf $RPM_BUILD_ROOT
 %license COPYING
 %doc README.md
 %defattr(-,root,root)
-%dir %{_libdir}/%{name}
 %{_bindir}/%{name}
 %{_bindir}/%{name}.bin
 %{_mandir}/%{name}.1
@@ -116,6 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %license COPYING
+%dir %{_libdir}/%{name}
 %{_libdir}/%{name}/*.so*
 
 
