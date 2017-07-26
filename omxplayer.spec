@@ -104,13 +104,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__install} -p ffmpeg_compiled/usr/local/lib/*.so* %{buildroot}/%{_libdir}/%{name}/
 
 
-
-%post libs -p /sbin/ldconfig
-
-
-%postun libs -p /sbin/ldconfig
-
-
 %files
 %license COPYING
 %doc README.md
