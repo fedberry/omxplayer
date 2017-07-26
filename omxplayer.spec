@@ -4,6 +4,11 @@
 %global ffmpeg_rel      3.1.7
 %global debug_package   %{nil}
 
+# We don't want any bundled libs in these directories to generate Provides
+%global __provides_exclude_from %{_libdir}/%{name}/.*\\.so
+%global private_libs libavcodec|libavdevice|libavfilter|libavformat|libavutil|libswresample|libswscale
+%global __requires_exclude ^(%{private_libs})\\.so
+
 Name:       omxplayer
 Version:    %{commit_date}
 Release:    2.%{commit_short}%{dist}
@@ -38,6 +43,13 @@ Requires:   %{name}-libs
 Requires:   fbset
 Requires:   gnu-free-sans-fonts
 
+Provides: bundled(libavcodec)
+Provides: bundled(libavdevice)
+Provides: bundled(libavfilter)
+Provides: bundled(libavformat)
+Provides: bundled(libavutil)
+Provides: bundled(libswresample)
+Provides: bundled(libswscale)
 
 
 %description
