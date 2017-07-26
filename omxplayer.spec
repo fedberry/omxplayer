@@ -1,7 +1,7 @@
 %global commit_date     20170330
 %global commit_long     061425a5eabf6e9ee43229911c073a863d144038
 %global commit_short    %(c=%{commit_long}; echo ${c:0:7})
-%global ffmpeg_rel      3.1.7
+%global ffmpeg_rel      3.1.9
 %global debug_package   %{nil}
 
 # We don't want any bundled libs in these directories to generate Provides
