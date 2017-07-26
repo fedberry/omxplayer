@@ -81,9 +81,9 @@ mkdir ffmpeg && tar -xzf %{SOURCE1} -C ffmpeg --strip-components=1
 
 
 %build
-make -f Makefile.ffmpeg CFLAGS="%{optflags}" configure
-make -f Makefile.ffmpeg compile
-make -f Makefile.ffmpeg install
+%{make_build} -f Makefile.ffmpeg configure
+%{make_build} -f Makefile.ffmpeg compile
+%{make_install} -f Makefile.ffmpeg
 
 # should we generate a version.h here first?
 %{make_build} omxplayer.bin
