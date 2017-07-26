@@ -18,6 +18,9 @@ Patch1:     0002-Makefile.include.patch
 Patch2:     0003-Makefile.ffmpeg.patch
 Patch3:     0004-fix-libs-path.patch
 Patch4:     0005-fix-font-paths.patch
+Patch5:     0006-fix-ffmpeg-configure-openssl-1.1.0.patch
+Patch6:     0007-fix-ffmpeg-rtmpdh-openssl-1.1.0.patch
+
 ExclusiveArch:  armv7hl
 
 BuildRequires:  boost-devel
@@ -51,10 +54,19 @@ Libraries used by %{name}
 
 
 %prep
-%autosetup -n %{name}-%{commit_long}
+%setup -n %{name}-%{commit_long}
+mkdir ffmpeg && tar -xzf %{SOURCE1} -C ffmpeg --strip-components=1
 
-mkdir ffmpeg
-tar -xzf %{SOURCE1} -C ffmpeg --strip-components=1
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%if 0%{fedora} > 25
+%patch5 -p1
+%patch6 -p1
+%endif
+
 
 %build
 make -f Makefile.ffmpeg CFLAGS="%{optflags}" configure
