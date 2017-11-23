@@ -1,5 +1,5 @@
-%global commit_date     20170330
-%global commit_long     061425a5eabf6e9ee43229911c073a863d144038
+%global commit_date     20170908
+%global commit_long     037c3c1eab2601dc1e8fb329c2290eb2380acb3c
 %global commit_short    %(c=%{commit_long}; echo ${c:0:7})
 %global ffmpeg_rel      3.3.5
 %global debug_package   %{nil}
