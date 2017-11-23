@@ -11,7 +11,7 @@
 
 Name:       omxplayer
 Version:    %{commit_date}
-Release:    3.%{commit_short}%{dist}
+Release:    1.%{commit_short}%{dist}
 Summary:    Raspberry Pi command line OMX player
 Group:      Applications/Multimedia
 License:    GPL-2.0+
@@ -114,6 +114,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Nov 23 2017 Vaughan Agrez <devel at agrez dot net> 20170908-1.037c3c1
+- Update to git commit: 037c3c1eab2601dc1e8fb329c2290eb2380acb3c
+- Bump ffmpeg release to 3.3.5
+- Drop ffmpeg openssl build fixes (merged upstream)
+
 * Tue Jul 25 2017 Vaughan Agrez <devel at agrez dot net> 20170330-3.061425a5
 - Fix building against openssl >= 1.1.0 (Patches 5 & 6)
 - Bump ffmpeg release to 3.1.9
