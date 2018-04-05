@@ -18,6 +18,7 @@ License:    GPL-2.0+
 URL:        https://github.com/popcornmix/%{name}
 Source0:    https://github.com/popcornmix/%{name}/archive/%{commit_long}.tar.gz#/%{name}-%{commit_short}.tar.gz
 Source1:    https://github.com/FFmpeg/FFmpeg/archive/n%{ffmpeg_rel}.tar.gz#/ffmpeg-%{ffmpeg_rel}.tar.gz
+Source2:    %{name}.desktop
 Patch0:     0001-Makefile.patch
 Patch1:     0002-Makefile.include.patch
 Patch2:     0003-Makefile.ffmpeg.patch
@@ -27,6 +28,7 @@ Patch4:     0005-fix-font-paths.patch
 ExclusiveArch:  armv7hl
 
 BuildRequires:  boost-devel
+BuildRequires:  desktop-file-utils
 BuildRequires:  raspberrypi-vc-static
 BuildRequires:  pkgconfig(alsa)
 BuildRequires:  pkgconfig(bcm_host)
@@ -51,7 +53,9 @@ Provides: bundled(libswscale)
 
 
 %description
-Omxplayer is a video player specifically made for the Raspberry Pi's GPU. It relies on the OpenMAX hardware acceleration API, which is the Broadcom's VideoCore officially supported API for GPU video/audio processing.
+OMXPlayer is a video player specifically made for the Raspberry Pi's GPU.
+It relies on the OpenMAX hardware acceleration API, which is the Broadcom's
+VideoCore officially supported API for GPU video/audio processing.
 
 
 %package libs
@@ -61,6 +65,17 @@ Group: System Environment/Libraries
 
 %description libs
 Libraries used by %{name}
+
+
+%package desktop
+Summary: OMXPlayer Desktop Entry specification file
+Requires: lxterminal
+Requires: libnotify
+
+
+%description desktop
+The freedesktop Desktop Entry specification file for OMXPlayer to integrate into
+desktop environments.
 
 
 %prep
@@ -97,6 +112,10 @@ rm -rf $RPM_BUILD_ROOT
 %{__install} -d %{buildroot}/%{_libdir}/%{name}
 %{__install} -p ffmpeg_compiled/usr/local/lib/*.so* %{buildroot}/%{_libdir}/%{name}/
 
+%{__install} -d %{buildroot}/%{_datadir}/applications
+%{__install} -p %{SOURCE2} %{buildroot}/%{_datadir}/applications
+desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
+
 
 %files
 %license COPYING
@@ -111,6 +130,10 @@ rm -rf $RPM_BUILD_ROOT
 %license COPYING
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/*.so*
+
+
+%files desktop
+%{_datadir}/applications/*.desktop
 
 
 %changelog

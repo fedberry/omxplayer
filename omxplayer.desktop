@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=OMXPlayer
+Comment=Raspberry Pi command line OMX player
+Exec=lxterminal --command="omxplayer -b %f"
+Icon=emblem-videos-symbolic
+Categories=Video;AudioVideo;Player
+NoDisplay=true
+MimeType=video/mp4;video/x-msvideo;video/x-matroska;video/quicktime
+Terminal=false
