@@ -24,7 +24,7 @@ Patch1:     0002-Makefile.include.patch
 Patch2:     0003-Makefile.ffmpeg.patch
 Patch3:     0004-fix-libs-path.patch
 Patch4:     0005-fix-font-paths.patch
-
+Patch5:     0006-video-group-check.patch
 ExclusiveArch:  armv7hl
 
 BuildRequires:  boost-devel
@@ -87,6 +87,7 @@ mkdir ffmpeg && tar -xzf %{SOURCE1} -C ffmpeg --strip-components=1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 
 %build

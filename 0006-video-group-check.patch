@@ -1,0 +1,37 @@
+From 32db1a0f08403d592d8ef8ec6b9fa770f445a6b4 Mon Sep 17 00:00:00 2001
+Message-Id: <32db1a0f08403d592d8ef8ec6b9fa770f445a6b4.1522912896.git.devel@agrez.net>
+From: Vaughan Agrez <devel@agrez.net>
+Date: Thu, 5 Apr 2018 15:21:26 +0800
+Subject: [PATCH] Add check for current user in the video group
+
+"failed to open vchiq instance" errors mean nothing to most people!
+---
+ omxplayer | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/omxplayer b/omxplayer
+index bef2600..a0e71f4 100755
+--- a/omxplayer
++++ b/omxplayer
+@@ -6,6 +6,18 @@
+ OMXPLAYER_DIR=`dirname $0`
+ OMXPLAYER_BIN="$OMXPLAYER_DIR/omxplayer.bin"
+ OMXPLAYER_LIBS="/usr/lib/omxplayer"
++VID_GROUP=$(groups| grep -c video)
++
++if [ $UID != 0 ]; then
++    if [ $VID_GROUP != 1 ]; then
++    MSG="Accelerated video playback requires user '$(whoami)' to be added to the 'video' group. For example:\nusermod -aG video $(whoami)\nYou must then log out and log back in."
++        if [ "$DISPLAY" != "" ] && [ -x /usr/bin/notify-send ]; then
++            notify-send -a OMXPlayer -t 10000 -i emblem-videos-symbolic "Required Permissions" "$MSG"
++        else
++            echo -e "OMXPlayer: $MSG"
++        fi
++    fi
++fi
+ 
+ refresh_regex='(|.* )(-r|--refresh)( .*|$)'
+ audio_regex='.*\.(mp3|wav|wma|cda|ogg|ogm|aac|ac3|flac)( .*|$)'
+-- 
+2.14.3
+
