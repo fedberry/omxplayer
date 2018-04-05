@@ -11,7 +11,7 @@
 
 Name:       omxplayer
 Version:    %{commit_date}
-Release:    1.%{commit_short}%{dist}
+Release:    2.%{commit_short}%{dist}
 Summary:    Raspberry Pi command line OMX player
 Group:      Applications/Multimedia
 License:    GPL-2.0+
@@ -138,6 +138,11 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Thu Apr 05 2018 Vaughan Agrez <devel at agrez dot net> 20170908-2.037c3c1
+- Bump ffmpeg release to 3.3.6
+- Add desktop file
+- Add video group check (Patch 5)
+
 * Thu Nov 23 2017 Vaughan Agrez <devel at agrez dot net> 20170908-1.037c3c1
 - Update to git commit: 037c3c1eab2601dc1e8fb329c2290eb2380acb3c
 - Bump ffmpeg release to 3.3.5
