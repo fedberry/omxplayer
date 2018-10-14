@@ -1,64 +1,44 @@
-From df70fb4a85729ec103dd23f0a7e28cf8f5be5177 Mon Sep 17 00:00:00 2001
-Message-Id: <df70fb4a85729ec103dd23f0a7e28cf8f5be5177.1492608143.git.devel@agrez.net>
+From f256ecb8d02a77bfd5c21285329c11520c4a407c Mon Sep 17 00:00:00 2001
+Message-Id: <f256ecb8d02a77bfd5c21285329c11520c4a407c.1539506014.git.devel@agrez.net>
 From: Vaughan Agrez <devel@agrez.net>
-Date: Wed, 19 Apr 2017 21:22:03 +0800
-Subject: [PATCH] Modify Makefile.ffmpeg
+Date: Sun, 14 Oct 2018 16:33:18 +0800
+Subject: [PATCH] Update Makefile.ffmpeg
 
 ---
- Makefile.ffmpeg | 11 +++--------
- 1 file changed, 3 insertions(+), 8 deletions(-)
+ Makefile.ffmpeg | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/Makefile.ffmpeg b/Makefile.ffmpeg
-index ea12aad..fc181ab 100644
+index 0ed4419..8f30f9b 100644
 --- a/Makefile.ffmpeg
 +++ b/Makefile.ffmpeg
-@@ -10,7 +10,7 @@ all: checkout configure compile
- .PHONY : copy
- copy:
- 	find ffmpeg -name '*.so*' -exec cp {} . \;
--	$(HOST)-strip *.so*
-+	strip *.so*
- 
- .PHONY : compile
- compile: 
-@@ -22,12 +22,9 @@ configure:
+@@ -20,11 +20,13 @@ configure:
  	CFLAGS="$(CFLAGS) ${INCLUDES}" \
  	LDFLAGS="" \
    ./configure \
--			--extra-cflags="-mfpu=vfp -mfloat-abi=$(FLOAT) -mno-apcs-stack-check -mstructure-size-boundary=32 -mno-sched-prolog" \
--			--enable-cross-compile \
+-			--extra-cflags="-mfpu=vfp -mfloat-abi=hard -mno-apcs-stack-check -mstructure-size-boundary=32 -mno-sched-prolog" \
++			--extra-cflags="-mfpu=neon-vfpv4 -mfloat-abi=hard -mno-apcs-stack-check -mstructure-size-boundary=32 -mno-sched-prolog" \
  			--enable-shared \
  			--disable-static \
  			--arch=arm \
 -			--cpu=arm1176jzf-s \
++			--cpu=armv7-a \
++			--enable-vfpv3 \
++			--enable-thumb \
  			--target-os=linux \
  			--disable-hwaccels \
  			--enable-parsers \
-@@ -50,8 +47,6 @@ configure:
+@@ -46,9 +48,7 @@ configure:
+ 			--enable-pthreads \
  			--enable-pic \
  			--disable-armv5te \
- 			--disable-neon \
+-			--disable-neon \
 -			--enable-armv6t2 \
 -			--enable-armv6 \
++			--enable-neon \
  			--enable-hardcoded-tables \
  			--disable-runtime-cpudetect \
  			--disable-debug \
-@@ -242,7 +237,7 @@ configure:
- 			--disable-decoder=idf \
- 			--disable-decoder=hevc \
- 			--enable-decoder=opus \
--			--cross-prefix=$(HOST)-
-+
- 
- .PHONY : clean
- clean:
-@@ -255,5 +250,5 @@ checkout:
- .PHONY : install
- install:
- 	cd ffmpeg; make -j9 DESTDIR="$(WORK)/ffmpeg_compiled" install
--	$(HOST)-strip ffmpeg_compiled/usr/local/lib/*.so
-+	strip ffmpeg_compiled/usr/local/lib/*.so
- 
 -- 
-2.9.3
+2.17.1
 

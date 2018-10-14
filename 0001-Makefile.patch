@@ -1,35 +1,31 @@
-From d2c912b4d3b60c2ba12bd0a5d13252fa33b4383b Mon Sep 17 00:00:00 2001
-Message-Id: <d2c912b4d3b60c2ba12bd0a5d13252fa33b4383b.1492608132.git.devel@agrez.net>
+From cdd790fad4d4f35145c9ea99862c9e305ca27404 Mon Sep 17 00:00:00 2001
+Message-Id: <cdd790fad4d4f35145c9ea99862c9e305ca27404.1539506008.git.devel@agrez.net>
 From: Vaughan Agrez <devel@agrez.net>
-Date: Wed, 19 Apr 2017 21:21:20 +0800
-Subject: [PATCH] Modify Makefile
+Date: Sun, 14 Oct 2018 16:33:03 +0800
+Subject: [PATCH] Update Makefile
 
 ---
- Makefile | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ Makefile | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 2857e94..bbaefc5 100644
+index 5f4e414..03d204c 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -4,7 +4,7 @@ CFLAGS+=-std=c++0x -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -DTARGET_POSIX
+@@ -1,10 +1,10 @@
+-CFLAGS=-pipe -mfloat-abi=hard -mcpu=arm1176jzf-s -fomit-frame-pointer -mabi=aapcs-linux -mtune=arm1176jzf-s -mfpu=vfp -Wno-psabi -mno-apcs-stack-check -g -mstructure-size-boundary=32 -mno-sched-prolog
++CFLAGS=-O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -march=armv7-a -mfpu=vfpv3-d16  -mfloat-abi=hard
+ CFLAGS+=-std=c++0x -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -DTARGET_POSIX -DTARGET_LINUX -fPIC -DPIC -D_REENTRANT -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CMAKE_CONFIG -D__VIDEOCORE4__ -U_FORTIFY_SOURCE -Wall -DHAVE_OMXLIB -DUSE_EXTERNAL_FFMPEG  -DHAVE_LIBAVCODEC_AVCODEC_H -DHAVE_LIBAVUTIL_OPT_H -DHAVE_LIBAVUTIL_MEM_H -DHAVE_LIBAVUTIL_AVUTIL_H -DHAVE_LIBAVFORMAT_AVFORMAT_H -DHAVE_LIBAVFILTER_AVFILTER_H -DHAVE_LIBSWRESAMPLE_SWRESAMPLE_H -DOMX -DOMX_SKIP64BIT -ftree-vectorize -DUSE_EXTERNAL_OMX -DTARGET_RASPBERRY_PI -DUSE_EXTERNAL_LIBBCM_HOST
  
- LDFLAGS+=-L./ -Lffmpeg_compiled/usr/local/lib/ -lc -lWFC -lGLESv2 -lEGL -lbcm_host -lopenmaxil -lfreetype -lz -lasound
+-LDFLAGS=-L$(SDKSTAGE)/opt/vc/lib/
++LDFLAGS=-L$(SDKSTAGE)/usr/lib/vc/
+ LDFLAGS+=-L./ -Lffmpeg_compiled/usr/local/lib/ -lc -lbrcmGLESv2 -lbrcmEGL -lbcm_host -lopenmaxil -lfreetype -lz -lasound
  
--INCLUDES+=-I./ -Ilinux -Iffmpeg_compiled/usr/local/include/ -I /usr/include/dbus-1.0 -I /usr/lib/arm-linux-gnueabihf/dbus-1.0/include
-+INCLUDES+=-I./ -Ilinux -Iffmpeg_compiled/usr/local/include/
+-INCLUDES+=-I./ -Ilinux -Iffmpeg_compiled/usr/local/include/ -I /usr/include/dbus-1.0 -I /usr/lib/arm-linux-gnueabihf/dbus-1.0/include -I/usr/include/freetype2 -isystem$(SDKSTAGE)/opt/vc/include -isystem$(SDKSTAGE)/opt/vc/include/interface/vcos/pthreads
++INCLUDES+=-I./ -Ilinux -Iffmpeg_compiled/usr/local/include/ -I /usr/include/dbus-1.0 -I /usr/lib/dbus-1.0/include -I/usr/include/freetype2 -isystem$(SDKSTAGE)/usr/include/vc -isystem$(SDKSTAGE)/include/vc/interface/vcos/pthreads
  
  DIST ?= omxplayer-dist
- 
-@@ -52,7 +52,7 @@ version:
- 	bash gen_version.sh > version.h 
- 
- omxplayer.bin: version $(OBJS)
--	$(CXX) $(LDFLAGS) -o omxplayer.bin $(OBJS) -lvchiq_arm -lvchostif -lvcos -ldbus-1 -lrt -lpthread -lavutil -lavcodec -lavformat -lswscale -lswresample -lpcre
-+	$(CXX) -o omxplayer.bin $(OBJS) $(LDFLAGS) -lvchiq_arm -lvchostif -lvcos -lOpenVG -ldbus-1 -lrt -lpthread -lavutil -lavcodec -lavformat -lswscale -lswresample -lpcre
- 	$(STRIP) omxplayer.bin
- 
- help.h: README.md Makefile
+ STRIP ?= strip
 -- 
-2.9.3
+2.17.1
 

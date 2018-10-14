@@ -81,7 +81,6 @@ desktop environments.
 %setup -n %{name}-%{commit_long}
 mkdir ffmpeg && tar -xzf %{SOURCE1} -C ffmpeg --strip-components=1
 
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
