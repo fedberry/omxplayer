@@ -19,8 +19,7 @@ URL:        https://github.com/popcornmix/%{name}
 Source0:    https://github.com/popcornmix/%{name}/archive/%{commit_long}.tar.gz#/%{name}-%{commit_short}.tar.gz
 Source1:    https://github.com/FFmpeg/FFmpeg/archive/n%{ffmpeg_rel}.tar.gz#/ffmpeg-%{ffmpeg_rel}.tar.gz
 Source2:    %{name}.desktop
-Patch0:     0001-Makefile.patch
-Patch1:     0002-Makefile.include.patch
+Patch1:     0001-Makefile.patch
 Patch2:     0003-Makefile.ffmpeg.patch
 Patch3:     0004-fix-libs-path.patch
 Patch4:     0005-fix-font-paths.patch
