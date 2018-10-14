@@ -11,12 +11,12 @@
 
 Name:       omxplayer
 Version:    %{commit_date}
-Release:    2.%{commit_short}%{dist}
+Release:    1.%{commit_short}%{dist}
 Summary:    Raspberry Pi command line OMX player
 Group:      Applications/Multimedia
 License:    GPL-2.0+
 URL:        https://github.com/popcornmix/%{name}
-Source0:    https://github.com/popcornmix/%{name}/archive/%{commit_long}.tar.gz#/%{name}-%{commit_short}.tar.gz
+Source0:    %{url}/archive/%{commit_long}.tar.gz#/%{name}-%{commit_short}.tar.gz
 Source1:    https://github.com/FFmpeg/FFmpeg/archive/n%{ffmpeg_rel}.tar.gz#/ffmpeg-%{ffmpeg_rel}.tar.gz
 Source2:    %{name}.desktop
 Patch1:     0001-Makefile.patch
@@ -106,8 +106,6 @@ sed -i 's/enable-libsmbclient/disable-libsmbclient/' Makefile.ffmpeg
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
 %{__install} -d %{buildroot}/%{_bindir}
 %{__install} -p %{name} %{buildroot}/%{_bindir}
 %{__install} -p %{name}.bin %{buildroot}/%{_bindir}
@@ -143,6 +141,14 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Sun Oct 14 2018 Vaughan Agrez <devel at agrez dot net> 20170908-3.037c3c1
+- Update to git commit: 7f3faf6cadac913013248de759462bcff92f0102
+- Bump ffmpeg release to 4.0.2
+- Refactor Makefile / Makefile.ffmpeg patches
+- Drop makefile.include patch
+- Disable generation of man file
+- Fix BuildRequires
+
 * Thu Apr 05 2018 Vaughan Agrez <devel at agrez dot net> 20170908-2.037c3c1
 - Bump ffmpeg release to 3.3.6
 - Add desktop file
