@@ -87,6 +87,13 @@ mkdir ffmpeg && tar -xzf %{SOURCE1} -C ffmpeg --strip-components=1
 %patch4 -p1
 %patch5 -p1
 
+%if 0%{?fedora} > 28
+# Disable ffmpeg libsmbclient support for now :-/
+# ERROR: libsmbclient not found
+# Refer: https://bugs.gentoo.org/666548
+sed -i 's/enable-libsmbclient/disable-libsmbclient/' Makefile.ffmpeg
+%endif
+
 
 %build
 %{make_build} -f Makefile.ffmpeg configure
