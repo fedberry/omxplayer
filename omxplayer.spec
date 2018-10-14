@@ -28,9 +28,9 @@ ExclusiveArch:  armv7hl
 
 BuildRequires:  boost-devel
 BuildRequires:  desktop-file-utils
+BuildRequires:  raspberrypi-vc-libs-devel
 BuildRequires:  raspberrypi-vc-static
 BuildRequires:  pkgconfig(alsa)
-BuildRequires:  pkgconfig(bcm_host)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(libpcre)
