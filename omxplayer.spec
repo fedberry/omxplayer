@@ -141,7 +141,7 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
-* Sun Oct 14 2018 Vaughan Agrez <devel at agrez dot net> 20170908-3.037c3c1
+* Sun Oct 14 2018 Vaughan Agrez <devel at agrez dot net> 20181014-1.7f3faf6
 - Update to git commit: 7f3faf6cadac913013248de759462bcff92f0102
 - Bump ffmpeg release to 4.0.2
 - Refactor Makefile / Makefile.ffmpeg patches
