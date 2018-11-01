@@ -1,0 +1,40 @@
+From 92adc49ee094b3d64912f3d41218976d7310822d Mon Sep 17 00:00:00 2001
+Message-Id: <92adc49ee094b3d64912f3d41218976d7310822d.1541041651.git.devel@agrez.net>
+From: Vaughan Agrez <devel@agrez.net>
+Date: Thu, 1 Nov 2018 11:07:21 +0800
+Subject: [PATCH] Fix keyboard input
+
+Refer: https://github.com/popcornmix/omxplayer/issues/649
+---
+ Keyboard.cpp | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/Keyboard.cpp b/Keyboard.cpp
+index d38a102..a582c53 100644
+--- a/Keyboard.cpp
++++ b/Keyboard.cpp
+@@ -23,9 +23,12 @@ Keyboard::Keyboard()
+     new_termios = orig_termios;
+     new_termios.c_lflag &= ~(ICANON | ECHO | ECHOCTL | ECHONL);
+     new_termios.c_cflag |= HUPCL;
+-    new_termios.c_cc[VMIN] = 0;
++    new_termios.c_cc[VMIN] = 1;
+ 
+     tcsetattr(STDIN_FILENO, TCSANOW, &new_termios);
++
++    orig_fl = fcntl(STDIN_FILENO, F_GETFL);
++    fcntl(STDIN_FILENO, F_SETFL, FNDELAY);
+   } 
+   else 
+   {    
+@@ -67,6 +70,7 @@ void Keyboard::restore_term()
+   if (isatty(STDIN_FILENO)) 
+   {
+     tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);
++    fcntl(STDIN_FILENO, F_SETFL, orig_fl);
+   } 
+   else 
+   {
+-- 
+2.17.2
+

@@ -24,6 +24,8 @@ Patch2:     0003-Makefile.ffmpeg.patch
 Patch3:     0004-fix-libs-path.patch
 Patch4:     0005-fix-font-paths.patch
 Patch5:     0006-video-group-check.patch
+# Refer: https://github.com/popcornmix/omxplayer/issues/649
+Patch6:     0007-Fix-keyboard-input.patch
 ExclusiveArch:  armv7hl
 
 BuildRequires:  boost-devel
@@ -86,8 +88,9 @@ mkdir ffmpeg && tar -xzf %{SOURCE1} -C ffmpeg --strip-components=1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-
 %if 0%{?fedora} > 28
+%patch6 -p1
+
 # Disable ffmpeg libsmbclient support for now :-/
 # ERROR: libsmbclient not found
 # Refer: https://bugs.gentoo.org/666548
