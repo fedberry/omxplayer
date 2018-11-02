@@ -40,7 +40,7 @@ BuildRequires:  pkgconfig(libssh)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(smbclient)
 
-Requires:   %{name}-libs
+Requires:   %{name}-libs%{?_isa} = %{version}-%{release}
 Requires:   fbset
 Requires:   gnu-free-sans-fonts
 
