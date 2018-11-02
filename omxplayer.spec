@@ -11,7 +11,7 @@
 
 Name:       omxplayer
 Version:    %{commit_date}
-Release:    1.%{commit_short}%{dist}
+Release:    2.%{commit_short}%{dist}
 Summary:    Raspberry Pi command line OMX player
 Group:      Applications/Multimedia
 License:    GPL-2.0+
@@ -148,6 +148,11 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Thu Nov 01 2018 Vaughan Agrez <devel at agrez dot net> 20181014-2.7f3faf6
+- Fix keyboard input for Fedberry 29
+- Re-enable man file generation for f27 & f29
+- Update Requires
+
 * Sun Oct 14 2018 Vaughan Agrez <devel at agrez dot net> 20181014-1.7f3faf6
 - Update to git commit: 7f3faf6cadac913013248de759462bcff92f0102
 - Bump ffmpeg release to 4.0.2
