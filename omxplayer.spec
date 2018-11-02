@@ -105,16 +105,19 @@ sed -i 's/enable-libsmbclient/disable-libsmbclient/' Makefile.ffmpeg
 
 # should we generate a version.h here first?
 %{make_build} omxplayer.bin
+%if 0%{?fedora} != 28
 %{make_build} omxplayer.1
-
+%endif
 
 %install
 %{__install} -d %{buildroot}/%{_bindir}
 %{__install} -p %{name} %{buildroot}/%{_bindir}
 %{__install} -p %{name}.bin %{buildroot}/%{_bindir}
 
+%if 0%{?fedora} != 28
 %{__install} -d %{buildroot}/%{_mandir}
 %{__install} -p %{name}.1 %{buildroot}/%{_mandir}
+%endif
 
 %{__install} -d %{buildroot}/%{_libdir}/%{name}
 %{__install} -p ffmpeg_compiled/usr/local/lib/*.so* %{buildroot}/%{_libdir}/%{name}/
@@ -130,8 +133,9 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
 %defattr(-,root,root)
 %{_bindir}/%{name}
 %{_bindir}/%{name}.bin
+%if 0%{?fedora} != 28
 %{_mandir}/%{name}.1
-
+%endif
 
 %files libs
 %license COPYING
